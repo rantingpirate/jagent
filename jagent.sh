@@ -29,7 +29,4 @@ if ! (( $running )); then
 	ssh-agent
 fi
 
-# If not quiet, echo agent PID
-if ! [[ "-q" == "$1" ]]; then
-	echo "echo Agent pid $pid"
-fi
+echo "echo Agent pid $pid"
