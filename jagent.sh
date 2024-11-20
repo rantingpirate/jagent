@@ -18,7 +18,11 @@ for dir in "${agentd[@]}"; do
 	pid=$(( ${agents##*.} + 1 ))
 
 	# If the agent is still running and is ours
-	if [[ -d /proc/$pid ]] && [[ $(stat -c '%U' /proc/$pid) == "$USER" ]]; then
+	procdir="/proc/$pid"
+	if [[ -d "$procdir" ]] \
+		&& [[ $(stat -c '%U' "$procdir") == "$USER" ]] \
+		&& [[ $(cat "$procdir/comm") == "ssh-agent" ]]
+	then
 		# Export the variables
 		echo "SSH_AUTH_SOCK=$agents; export SSH_AUTH_SOCK;"
 		echo "SSH_AGENT_PID=$pid; export SSH_AGENT_PID;"
