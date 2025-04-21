@@ -6,7 +6,7 @@ set pipefail
 ls=/bin/ls
 find=/bin/find
 
-tmp=/tmp
+tmp=${TMPDIR:-/tmp}
 running=0
 
 # List all ssh-agent directories
